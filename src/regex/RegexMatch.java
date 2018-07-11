@@ -78,6 +78,8 @@ public class RegexMatch {
 		parseEvent(e6).print();
 		String e7 = "Sleep     20      minute";
 		parseEvent(e7).print();
+		String e8 = "    20      minute";
+		parseEvent(e8).print();
 		
 		/* Exclusion matching */
 		String s1 = "foo"; 
