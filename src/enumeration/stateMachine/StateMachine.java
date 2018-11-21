@@ -19,7 +19,6 @@ public class StateMachine {
 		state = state.process(arg);
 	}
 	
-	
 	public static void main(String[] args) {
 		StateMachine sm = new StateMachine(); 
 		sm.processRequest("Shout");
