@@ -1,4 +1,4 @@
-package enumeration.moreUseFullEnum.enumWithValues;
+package enumeration.moreUsefullEnum.enumWithValues;
 
 /**
  * See how Java enum with values works
