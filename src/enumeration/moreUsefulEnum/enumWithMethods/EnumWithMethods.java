@@ -1,4 +1,4 @@
-package enumeration.moreUsefullEnum.enumWithMethods;
+package enumeration.moreUsefulEnum.enumWithMethods;
 
 /**
  * See how Java enum with defined methods works

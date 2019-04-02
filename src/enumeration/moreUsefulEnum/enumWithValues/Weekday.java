@@ -1,4 +1,4 @@
-package enumeration.moreUsefullEnum.enumWithValues;
+package enumeration.moreUsefulEnum.enumWithValues;
 
 /**
  * Instead of being defined as constant types, Java enum can be more useful with value members

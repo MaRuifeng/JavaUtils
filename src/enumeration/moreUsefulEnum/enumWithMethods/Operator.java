@@ -1,4 +1,4 @@
-package enumeration.moreUsefullEnum.enumWithMethods;
+package enumeration.moreUsefulEnum.enumWithMethods;
 
 /**
  * Enum with defined methods
