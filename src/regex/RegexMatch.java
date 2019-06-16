@@ -1,6 +1,7 @@
 package regex;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -94,9 +95,46 @@ public class RegexMatch {
         return matches;
     }
 
+    /**
+     * Roman numeric string matching
+     */
+    private static final Pattern ROMAN_NUMBER_PATTERN = Pattern.compile("^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$");
+    private static final Pattern ROMAN_SYMBOL_PATTERN = Pattern.compile("CM|M|CD|D|XC|C|XL|L|IX|X|IV|V|I");
+
+    private static boolean isValidRomanNumber(String romanNumeralString) {
+        System.out.println("Input string: " + romanNumeralString);
+        List<String> matches = new ArrayList<>();
+
+        Matcher m = ROMAN_NUMBER_PATTERN.matcher(romanNumeralString);
+        while (m.find()) {
+            matches.add(m.group());
+            for (int i=0; i<m.groupCount(); i++) System.out.println("Group " + i + ": " + m.group(i));
+        }
+
+        System.out.println("Matches found:" + matches);
+        return ! matches.isEmpty();
+    }
+
+    private static List<String> parseRomanNumber(String romanNumeralString) {
+        System.out.println("Input string: " + romanNumeralString);
+        // if ( ! isValidRomanNumber(romanNumeralString)) return Collections.EMPTY_LIST;
+
+        List<String> matches = new ArrayList<>();
+
+        Matcher m = ROMAN_SYMBOL_PATTERN.matcher(romanNumeralString);
+
+        while (m.find()) {
+            matches.add(m.group());
+            for (int i=0; i<m.groupCount(); i++) System.out.println("Group " + i + ": " + m.group(i));
+        }
+
+        return matches;
+    }
+
 
     public static void main(String[] args) {
         /* Event matching */
+        System.out.println("\n============ Event Matching (Start) ============");
         String e1 = "Talk show 10 min";
         parseEvent(e1).print();
         String e2 = "Movie screening 60minutes";
@@ -113,9 +151,10 @@ public class RegexMatch {
         parseEvent(e7).print();
         String e8 = "    20      minute";
         parseEvent(e8).print();
-        System.out.println("==================================");
+        System.out.println("============ Event Matching (End)===========\n");
 
         /* Exclusion matching */
+        System.out.println("\n============ Exclusive Matching (Start) ============");
         String s1 = "foo";
         System.out.println(testXORRegex(s1));
         String s2 = "bar";
@@ -124,14 +163,28 @@ public class RegexMatch {
         System.out.println(testXORRegex(s3));
         String s4 = "testfoobartest";
         System.out.println(testXORRegex(s4));
-        System.out.println("==================================");
+        System.out.println("============ Exclusive Matching (End)===========\n");
 
         /* IPv4 address parsing */
+        System.out.println("\n============ IPv4 Matching (Start) ============");
         String ipStr1 = "127.0.0.124.198.192.3.45.123.4.5.6.7";
         for (String match : parseIPv4Addresses(ipStr1)) System.out.println(">>> Match: " + match);
 
         String ipStr2 = "91.2.3.1. .8. 0.1.7... .4.5..";
         for (String match : parseIPv4Addresses(ipStr2)) System.out.println(">>> Match: " + match);
+        System.out.println("============ IPv4 Matching (End)===========\n");
+
+        /* Roman number matching */
+        System.out.println("\n============ Roman Number Matching (Start) ============");
+        String romanNumStr = "MMMCMXCIX";
+        System.out.println("Is valid Roman number? " + isValidRomanNumber(romanNumStr));
+        System.out.println("============ Roman Number Matching (End)===========\n");
+
+        /* Roman number parsing */
+        System.out.println("\n============ Roman Number Parsing (Start) ============");
+        for (String match : parseRomanNumber("MMMCDLXXXIV")) System.out.println(">>> Match: " + match);
+        System.out.println("============ Roman Number Parsing (End)===========\n");
+
     }
 
 }
