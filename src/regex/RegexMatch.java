@@ -131,6 +131,24 @@ public class RegexMatch {
         return matches;
     }
 
+    /**
+     * Capturing group with quantifier
+     */
+    private static final Pattern REPEATED_GROUP_PATTERN = Pattern.compile("(\\d\\s+){4}");
+    private static List<String> parseRepeatedGroupsWithQuantifier(String numStr) {
+        System.out.println("Input string: " + numStr);
+
+        List<String> matches = new ArrayList<>();
+
+        Matcher m = REPEATED_GROUP_PATTERN.matcher(numStr);
+
+        while (m.find()) {
+            matches.add(m.group());
+            for (int i=0; i<m.groupCount(); i++) System.out.println("Group " + i + ": " + m.group(i));
+        }
+
+        return matches;
+    }
 
     public static void main(String[] args) {
         /* Event matching */
@@ -183,6 +201,11 @@ public class RegexMatch {
         /* Roman number parsing */
         System.out.println("\n============ Roman Number Parsing (Start) ============");
         for (String match : parseRomanNumber("MMMCDLXXXIV")) System.out.println(">>> Match: " + match);
+        System.out.println("============ Roman Number Parsing (End)===========\n");        /* Roman number parsing */
+
+        /* Repeated capturing group with quantifier */
+        System.out.println("\n============ Roman Number Parsing (Start) ============");
+        for (String match : parseRepeatedGroupsWithQuantifier("1 2 5 3 ")) System.out.println(">>> Match: " + match);
         System.out.println("============ Roman Number Parsing (End)===========\n");
 
     }
